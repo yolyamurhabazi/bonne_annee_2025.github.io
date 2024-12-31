@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Poppins:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap");
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url('bg.jpg') no-repeat center;
+    background-size: cover;
+    text-shadow: 0 0 25px white, 0 0 50px white, 0 0 100px white;
+    color: #fff6a9;
+    text-align: center;
+}
+
+#newyear {
+    font-size: 6rem;
+    font-family: "Bilbo Swash Caps", cursive;
+    letter-spacing: 0.5rem;
+    color: #fff;
+    font-weight: bold;
+}
+.voeux {
+    font-family: 'Georgia', 'Times New Roman', serif; /* Police élégante pour l'italique */
+    font-style: italic;
+    font-size: clamp(1em, 3vw, 1.5em); /* S'ajuste à la largeur de l'écran */
+    color: #ffffff;
+    text-shadow: 0 0 8px #FFD700, 0 0 16px #FFA500, 0 0 24px #FF4500; /* Effet lumineux */
+    text-align: center;
+    margin: 10px auto;
+    max-width: 90%; /* Ne dépasse pas 90% de la largeur de l'écran */
+    line-height: 1.5;
+    word-wrap: break-word; /* Evite le dépassement du texte */
+}
+
+#year {
+    font-family: 'Pacifico', cursive;
+    color: #fff;
+    font-size: 3rem;
+    margin-top: 1px;
+    font-style: italic;
+}
+
+button {
+    width: 13rem;
+    font-size: 1.5rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 1rem;
+    font-family: 'Allerta Stencil', sans-serif;
+    outline: 4px solid white;
+    outline-offset: 0.4rem;
+    margin-top: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 25px white, 0 0 50px white, 0 0 100px white;
+}
+
+button:hover {
+    cursor: pointer;
+    outline-offset: 0.3rem;
+    letter-spacing: 0.1rem;
+    transition: all 0.4s;
+}
+
+@media screen and (max-width:767px) {
+    #newyear {
+        letter-spacing: 0.3rem;
+        color: #fff;
+        font-size: 4rem;
+        font-weight: bold;
+    }
+
+    #year {
+        font-family: 'Pacifico', cursive;
+        color: #fff;
+        font-size: 2.5rem;
+    }
+
+    button {
+        width: 15rem;
+        font-size: 2rem;
+    }
+}
+
+.snowflake {
+    color: #fff;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px #fff;
+}
+
+.snowflake,
+.snowflake .inner {
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+@keyframes snowflakes-fall {
+    0% {
+        transform: translateY(0);;
+    }
+
+    100% {
+        transform: translateY(110vh)
+    }
+}
+
+@keyframes snowflakes-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(80px);
+    }
+}
+
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 9999;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    animation-name: snowflakes-shake;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out
+}
+
+.snowflake .inner {
+    animation-duration: 10s;
+    animation-name: snowflakes-fall;
+    animation-timing-function: linear
+}
+
+.snowflake:nth-of-type(0) {
+    left: 1%;
+    animation-delay: 0s
+}
+
+.snowflake:nth-of-type(0) .inner {
+    animation-delay: 0s
+}
+
+.snowflake:first-of-type {
+    left: 10%;
+    animation-delay: 1s
+}
+
+.snowflake:first-of-type .inner,
+.snowflake:nth-of-type(8) .inner {
+    animation-delay: 1s
+}
+
+.snowflake:nth-of-type(2) {
+    left: 20%;
+    animation-delay: .5s
+}
+
+.snowflake:nth-of-type(2) .inner,
+.snowflake:nth-of-type(6) .inner {
+    animation-delay: 6s
+}
+
+.snowflake:nth-of-type(3) {
+    left: 30%;
+    animation-delay: 2s
+}
+
+.snowflake:nth-of-type(11) .inner,
+.snowflake:nth-of-type(3) .inner {
+    animation-delay: 4s
+}
+
+.snowflake:nth-of-type(4) {
+    left: 40%;
+    animation-delay: 2s
+}
+
+.snowflake:nth-of-type(10) .inner,
+.snowflake:nth-of-type(4) .inner {
+    animation-delay: 2s
+}
+
+.snowflake:nth-of-type(5) {
+    left: 50%;
+    animation-delay: 3s
+}
+
+.snowflake:nth-of-type(5) .inner {
+    animation-delay: 8s
+}
+
+.snowflake:nth-of-type(6) {
+    left: 60%;
+    animation-delay: 2s
+}
+
+.snowflake:nth-of-type(7) {
+    left: 70%;
+    animation-delay: 1s
+}
+
+.snowflake:nth-of-type(7) .inner {
+    animation-delay: 2.5s
+}
+
+.snowflake:nth-of-type(8) {
+    left: 80%;
+    animation-delay: 0s
+}
+
+.snowflake:nth-of-type(9) {
+    left: 90%;
+    animation-delay: 1.5s
+}
+
+.snowflake:nth-of-type(9) .inner {
+    animation-delay: 3s
+}
+
+.snowflake:nth-of-type(10) {
+    left: 25%;
+    animation-delay: 0s
+}
+
+.snowflake:nth-of-type(11) {
+    left: 65%;
+    animation-delay: 2.5s
+}
+.image-upload {
+    text-align: center;
+    margin: 1px 0;
+    box-shadow:  100px 36px 100px 15px rgba(170, 172, 27, 0.5);
+border-radius: 36px;
+    border-radius: 70px;
+}
+
+.upload-frame {
+    width: 300px;
+    height: 300px;
+    border: 2px dashed #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.upload-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+
+}
+
+#snowflakes.img{
+    border-radius: 50px;
+
+}
+.firework {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: firework-rise 2s ease-out;
+    transition: transform 1s ease, opacity 1s ease;
+}
+.action-icons {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+    margin-bottom: 10px;
+}
+
+.action-icons button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+
+}
+
+.action-icons button:hover {
+    transform: scale(1.1);
+    background-color: #666;
+}
+
+@media (max-width: 600px) {
+    .action-icons button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1em;
+        margin-top: 30px;
+        margin-right: 10px;
+    }
+}
+@media (max-width: 600px) {
+    #year {
+        font-size: 3em;
+    }
+}
+
+/* style pour le feu */
+#fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10; /* Derrière tous les éléments */
+    overflow: hidden;
+    pointer-events: none;
+    background: transparent;
+}
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+    

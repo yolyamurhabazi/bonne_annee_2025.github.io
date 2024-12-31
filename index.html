@@ -1,0 +1,224 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+    <style> @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap'); </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Antonio&display=swap" rel="stylesheet">
+    <style> @import url('https://fonts.googleapis.com/css2?family=Antonio&display=swap'); </style>
+    <script type="text/javascript" src="jquery.fireworks.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="snowflakes" aria-hidden="true">
+
+    </div>
+    <!-- code pour le feu artifice -->
+    <div id="fireworks-container"></div>
+
+    <p id="newyear">Happy New Year 2025</p>
+    
+    <div class="image-upload">
+        <label for="file-input">
+            <div class="upload-frame">
+                <p id="upload-text"><img src="upload.png" alt=""></p>
+            </div>
+        </label>
+        <input id="file-input" type="file" accept="image/*" style="display: none;" onchange="displayImage(event)">
+    </div> 
+    <p class="voeux">
+        "Que cette nouvelle année soit remplie de bonheur, de succès, et de moments inoubliables auprès de vos proches. Qu’elle vous apporte santé, amour, et la réalisation de tous vos rêves. Accueillons cette année avec optimisme et détermination pour faire de chaque jour une belle aventure. Bonne année 2025 !"
+    </p>   
+    <p id="year">
+       
+    </p>
+
+    <button>Click Here</button>
+    <div class="action-icons">
+        <button id="share-btn" class="action-btn" aria-label="Partager">
+            <i class="fa fa-share-alt"></i>
+        </button>
+    </div>    
+    <script src="index.js"></script>
+
+    <!-- pour le partage du site  -->
+
+    <script>
+        // Gestion du partage natif
+        document.getElementById("share-btn").addEventListener("click", async () => {
+            const shareData = {
+                title: "Bonne année 2025 !",
+                text: "Découvrez cette page festive pour la nouvelle année !",
+                url: window.location.href, // URL actuelle de la page
+            };
+    
+            // Vérifier si l'API de partage est prise en charge
+            if (navigator.share) {
+                try {
+                    // Tenter de partager les données
+                    await navigator.share(shareData);
+                    console.log("Partage réussi !");
+                } catch (err) {
+                    // Gérer les erreurs du partage
+                    console.error("Erreur lors du partage :", err.message);
+                    alert("Le partage a été annulé ou une erreur s'est produite.");
+                }
+            } else {
+                // Gestion pour les navigateurs non compatibles
+                alert(
+                    "Désolé, la fonctionnalité de partage n'est pas disponible sur cet appareil ou navigateur."
+                );
+            }
+        });
+    </script>
+    
+<!-- script pour la modification     -->
+    <script>
+        // Permettre la modification du nom directement dans le paragraphe
+        const yearElement = document.getElementById("year");
+        yearElement.innerHTML = '<span id="name-placeholder" contenteditable="true" spellcheck="false" >veillez saisir votre nom ici ! </span>';
+    </script>        
+    <script>
+        function displayImage(event) {
+    const file = event.target.files[0];
+    const uploadFrame = document.querySelector(".upload-frame");
+    const uploadText = document.getElementById("upload-text");
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            // Remove text and display the image 
+            uploadText.style.display = "none";
+            uploadFrame.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`;
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+    </script>   
+    <script>
+        // Partage natif
+        document.getElementById("share-btn").addEventListener("click", async () => {
+            const shareData = {
+                title: "Bonne année 2025 !",
+                text: "Découvrez cette page festive pour la nouvelle année !",
+                url: window.location.href,
+            };
+    
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.error("Erreur lors du partage :", err);
+                    alert("Une erreur est survenue lors du partage.");
+                }
+            } else {
+                alert("Le partage n'est pas pris en charge sur cet appareil.");
+            }
+        });
+    </script> 
+    
+    <!-- script pour le feu d'artifice -->
+    <script>
+        // Création et configuration du canvas
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        document.getElementById('fireworks-container').appendChild(canvas);
+    
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    
+        // Ajuster la taille du canvas en cas de redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    
+        // Liste des particules
+        let particles = [];
+    
+        // Fonction utilitaire pour générer un nombre aléatoire entre min et max
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+    
+        // Créer des particules pour un feu d'artifice
+        function createParticle(x, y) {
+            const count = random(30, 60); // Nombre de particules par explosion
+            for (let i = 0; i < count; i++) {
+                const angle = (Math.PI * 2 * i) / count; // Distribution circulaire
+                const speed = random(2, 6); // Vitesse aléatoire
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    alpha: 1,
+                    color: `hsl(${random(0, 360)}, 100%, 50%)` // Couleurs vives
+                });
+            }
+        }
+    
+        // Animation des particules
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+            particles.forEach((particle, index) => {
+                // Mettre à jour la position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+    
+                // Diminuer l'opacité pour le fondu
+                particle.alpha -= 0.02;
+    
+                // Supprimer les particules invisibles
+                if (particle.alpha <= 0) {
+                    particles.splice(index, 1);
+                } else {
+                    // Dessiner la particule
+                    ctx.globalAlpha = particle.alpha;
+                    ctx.fillStyle = particle.color;
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 5);
+                    ctx.fill();
+                }
+            });
+    
+            requestAnimationFrame(animate);
+        }
+    
+        // Générer des feux d'artifice aléatoirement
+        setInterval(() => {
+            const x = random(5, canvas.width); // Position horizontale aléatoire
+            const y = random(canvas.height / 2, canvas.height); // Position verticale aléatoire
+            createParticle(x, y);
+        }, 1000);
+    
+        // Lancer l'animation
+        animate();
+    </script>  
+         <footer style="z-index: -1000;">
+    
+         </footer> 
+     <script>
+        $('footer').fireworks({
+      sound:false,
+      opacity: 0.4,
+      width:'100%',
+      height:'100%'
+    });
+    </script> 
+
+</body>
+
+
+</html>
